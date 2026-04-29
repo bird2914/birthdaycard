@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>电子生日贺卡 | 百合花语 · 专属祝福</title>
+    <title>🎂 互动电子生日贺卡 | 百合花祝福</title>
     <style>
         * {
             margin: 0;
@@ -23,183 +23,221 @@
         }
 
         .card-wrapper {
-            perspective: 2000px;
             width: 100%;
-            max-width: 680px;
-            transition: all 0.3s ease;
+            max-width: 700px;
         }
 
         .birthday-card {
             background: rgba(255, 250, 240, 0.97);
             border-radius: 64px 64px 70px 70px;
-            box-shadow: 0 35px 50px rgba(0, 0, 0, 0.3), 0 0 0 10px rgba(235, 210, 160, 0.6), 0 0 0 16px rgba(215, 180, 110, 0.4);
+            box-shadow: 0 35px 50px rgba(0, 0, 0, 0.3), 0 0 0 10px rgba(235, 210, 160, 0.6);
             overflow: hidden;
-            backdrop-filter: blur(3px);
-            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1), box-shadow 0.3s;
-            animation: gentleFloat 3.5s infinite alternate ease-in-out;
+            transition: transform 0.3s ease;
         }
 
         .birthday-card:hover {
-            transform: translateY(-6px) scale(1.01);
-            box-shadow: 0 45px 60px rgba(0, 0, 0, 0.35);
+            transform: translateY(-5px);
         }
 
-        @keyframes gentleFloat {
-            0% { transform: translateY(0px); }
-            100% { transform: translateY(-5px); }
-        }
-
+        /* 百合花丝带 */
         .lily-ribbon {
             background: linear-gradient(105deg, #7c9a5e, #b9cf8b, #e7dbb3);
-            height: 38px;
-            width: 100%;
-            position: relative;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            height: 45px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 20px;
-        }
-        .lily-ribbon span {
-            font-size: 26px;
-            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+            padding: 0 25px;
+            font-size: 28px;
         }
 
         .content {
-            padding: 20px 28px 38px;
+            padding: 25px 30px 40px;
             text-align: center;
-            position: relative;
         }
 
+        /* 百合花装饰 */
         .lily-deco {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin: -40px auto 12px;
+            gap: 20px;
+            margin: -45px auto 15px;
         }
         .lily-flower {
             background: #fffaf0;
-            width: 70px;
-            height: 70px;
-            border-radius: 60% 40% 50% 50%;
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 48px;
+            font-size: 50px;
             background: radial-gradient(circle at 30% 30%, #feffd2, #f9efc0);
-            box-shadow: 0 12px 20px rgba(0,0,0,0.15);
-            border: 2px solid #f3deba;
-            transition: transform 0.2s;
-        }
-        .lily-flower:hover {
-            transform: scale(1.06) rotate(2deg);
+            box-shadow: 0 10px 18px rgba(0,0,0,0.15);
+            border: 3px solid #f3deba;
         }
 
-        /* 可编辑面板 - 修复版 */
-        .edit-panel {
-            background: #fff7ef;
-            border-radius: 48px;
-            padding: 12px 18px;
-            margin: 12px 0 20px;
-            box-shadow: inset 0 0 0 1px #ffeee0, 0 8px 18px rgba(0,0,0,0.08);
-        }
-        .edit-row {
+        /* ========== 状态栏（新增） ========== */
+        .status-bar {
+            background: linear-gradient(135deg, #2c3e2b, #3d5a3a);
+            border-radius: 40px;
+            padding: 10px 18px;
+            margin-bottom: 20px;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
-            align-items: baseline;
+            align-items: center;
             gap: 12px;
-            margin-bottom: 12px;
-        }
-        .edit-item {
-            flex: 1;
-            min-width: 130px;
-            text-align: left;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #5b3c1e;
-        }
-        .edit-item label {
-            display: block;
-            font-size: 0.7rem;
-            letter-spacing: 1px;
-            margin-bottom: 4px;
-            color: #a16b3a;
-        }
-        .edit-item input, .edit-item textarea {
-            width: 100%;
-            background: #fffef7;
-            border: 1px solid #fad19e;
-            border-radius: 60px;
-            padding: 8px 14px;
-            font-family: inherit;
-            font-size: 0.9rem;
-            outline: none;
-            transition: 0.2s;
-            color: #3c2a1f;
-        }
-        .edit-item textarea {
-            border-radius: 24px;
-            resize: vertical;
-            min-height: 55px;
-        }
-        .edit-item input:focus, .edit-item textarea:focus {
-            border-color: #b58b4b;
-            box-shadow: 0 0 0 2px #ffddb0;
-        }
-        .preview-tip {
-            font-size: 0.65rem;
-            text-align: right;
-            color: #c28d55;
-            margin-top: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            border: 1px solid #9bbd7a;
         }
 
-        .greeting {
-            font-size: 2.5rem;
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,245,0.15);
+            padding: 5px 14px;
+            border-radius: 30px;
+            font-size: 0.8rem;
             font-weight: bold;
-            background: linear-gradient(135deg, #bc6f2c, #eb9e3e, #f7c56e);
+            color: #fff3cf;
+            backdrop-filter: blur(4px);
+        }
+
+        .status-icon {
+            font-size: 1.1rem;
+        }
+
+        .status-text {
+            font-family: monospace;
+            letter-spacing: 0.5px;
+        }
+
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 6px;
+            animation: pulse 1.5s infinite;
+        }
+
+        .indicator-active {
+            background-color: #7eff7e;
+            box-shadow: 0 0 6px #7eff7e;
+        }
+
+        .indicator-idle {
+            background-color: #ffaa66;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        /* 可编辑区域 */
+        .edit-area {
+            background: #fff8f0;
+            border-radius: 40px;
+            padding: 20px;
+            margin: 15px 0 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid #f5e5cf;
+        }
+
+        .edit-group {
+            margin-bottom: 18px;
+            text-align: left;
+        }
+
+        .edit-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #8b6946;
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+        }
+
+        .edit-group input,
+        .edit-group textarea {
+            width: 100%;
+            padding: 10px 15px;
+            border: 2px solid #f0dbc0;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-family: inherit;
+            background: white;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .edit-group textarea {
+            border-radius: 25px;
+            resize: vertical;
+            min-height: 70px;
+        }
+
+        .edit-group input:focus,
+        .edit-group textarea:focus {
+            border-color: #b58b4b;
+            box-shadow: 0 0 0 3px rgba(181, 139, 75, 0.2);
+        }
+
+        .hint {
+            font-size: 0.7rem;
+            color: #b88b54;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        /* 展示区 */
+        .greeting-title {
+            font-size: 2.2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #bc6f2c, #eb9e3e);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
-            margin: 8px 0 4px;
-            font-family: 'Pacifico', 'Dancing Script', cursive;
+            margin: 10px 0 5px;
         }
-        .name {
-            font-size: 2.2rem;
+
+        .display-name {
+            font-size: 2.5rem;
             font-weight: 800;
             background: linear-gradient(145deg, #2d6a4f, #52b788);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
+            border-bottom: 3px solid #ffd966;
             display: inline-block;
-            border-bottom: 3px solid #ade8f4;
             padding-bottom: 5px;
+            margin: 5px 0;
         }
-        .custom-message {
-            font-size: 1.1rem;
-            background: #fef5e3;
-            padding: 10px 16px;
-            border-radius: 48px;
-            margin: 18px 0 12px;
-            color: #4f2d14;
-            font-weight: 500;
-            line-height: 1.4;
-            display: inline-block;
-            max-width: 90%;
-            box-shadow: inset 0 1px 3px #ffe9c7, 0 4px 8px rgba(0,0,0,0.02);
-        }
-        .date-badge {
+
+        .display-date {
             background: #e9dfb2;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 6px 20px;
+            gap: 10px;
+            padding: 8px 25px;
             border-radius: 60px;
+            font-size: 1rem;
             font-weight: bold;
-            font-size: 0.9rem;
             color: #5a3e26;
-            margin: 8px 0 12px;
-            font-family: monospace;
+            margin: 12px 0;
+        }
+
+        .display-message {
+            background: #fef5e3;
+            padding: 15px 20px;
+            border-radius: 40px;
+            margin: 15px 0 20px;
+            color: #4f2d14;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            font-weight: 500;
         }
 
         .celebrate-btn {
@@ -208,34 +246,30 @@
             color: white;
             font-size: 1.2rem;
             font-weight: bold;
-            padding: 12px 28px;
+            padding: 12px 30px;
             border-radius: 56px;
             cursor: pointer;
-            transition: 0.25s ease;
-            box-shadow: 0 12px 18px rgba(0, 0, 0, 0.2);
-            margin: 8px 0 12px;
+            transition: 0.2s;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            margin: 10px 0;
             width: 80%;
-            font-family: inherit;
-            letter-spacing: 2px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
         }
+
         .celebrate-btn:hover {
-            transform: scale(1.02) translateY(-3px);
+            transform: scale(1.02);
             background: linear-gradient(120deg, #9bcd7c, #6ea35a);
         }
-        .footer-sign {
-            margin-top: 22px;
+
+        .footer {
+            margin-top: 20px;
             font-size: 0.7rem;
             color: #bc8e62;
             display: flex;
             justify-content: center;
-            gap: 16px;
-            flex-wrap: wrap;
+            gap: 15px;
         }
 
+        /* 动画 canvas */
         .canvas-deco {
             position: fixed;
             top: 0;
@@ -246,43 +280,25 @@
             z-index: 10;
         }
 
-        .music-toggler {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(48, 64, 38, 0.75);
-            backdrop-filter: blur(8px);
-            border-radius: 60px;
-            padding: 6px 14px;
-            color: #f9eec1;
-            font-size: 0.75rem;
-            font-weight: bold;
-            z-index: 200;
-            cursor: pointer;
-            border: 1px solid #d4b87a;
-            font-family: monospace;
-        }
-
-        @media (max-width: 560px) {
-            .content { padding: 16px 16px 28px; }
-            .greeting { font-size: 1.9rem; }
-            .name { font-size: 1.7rem; }
-            .edit-row { flex-direction: column; }
+        @media (max-width: 550px) {
+            .content { padding: 20px; }
+            .display-name { font-size: 1.8rem; }
+            .greeting-title { font-size: 1.6rem; }
+            .display-message { font-size: 0.95rem; }
+            .status-bar { flex-direction: column; align-items: stretch; }
+            .status-item { justify-content: center; }
         }
     </style>
 </head>
 <body>
 
-<canvas id="lilyCanvas" class="canvas-deco"></canvas>
-<div class="music-toggler" id="musicToggleBtn">
-    <span>🎵</span> <span id="musicStatus">播放音乐祝福</span>
-</div>
+<canvas id="decoCanvas" class="canvas-deco"></canvas>
 
 <div class="card-wrapper">
     <div class="birthday-card">
         <div class="lily-ribbon">
             <span>🌸</span>
-            <span class="lily-icon">⚜️ 百合花语 · 纯洁祝福 ⚜️</span>
+            <span>⚜️ 百合花祝福 ⚜️</span>
             <span>🌿</span>
         </div>
         <div class="content">
@@ -292,328 +308,374 @@
                 <div class="lily-flower">🌼</div>
             </div>
 
-            <!-- 可编辑区域 - 修复：确保可以修改 -->
-            <div class="edit-panel">
-                <div class="edit-row">
-                    <div class="edit-item">
-                        <label>✨ 收件人名字</label>
-                        <input type="text" id="nameInput" value="林语晴">
-                    </div>
-                    <div class="edit-item">
-                        <label>📅 生日日期</label>
-                        <input type="text" id="dateInput" value="5月20日">
-                    </div>
+            <!-- ========== 状态栏 ========== -->
+            <div class="status-bar">
+                <div class="status-item">
+                    <span class="status-icon">🎵</span>
+                    <span class="status-text" id="musicStatusText">音乐待播放</span>
+                    <span id="musicIndicator" class="status-indicator indicator-idle"></span>
                 </div>
-                <div class="edit-row">
-                    <div class="edit-item">
-                        <label>💌 专属祝福语</label>
-                        <textarea id="messageInput" rows="2">愿你的笑容如百合花般清雅绽放，每一天都有阳光与花香相伴。生日快乐，永远被温柔眷顾！</textarea>
-                    </div>
+                <div class="status-item">
+                    <span class="status-icon">✨</span>
+                    <span class="status-text" id="effectStatusText">特效待触发</span>
+                    <span id="effectIndicator" class="status-indicator indicator-idle"></span>
                 </div>
-                <div class="preview-tip">✏️ 修改上面的文字，贺卡会立刻同步更新 ✨</div>
+                <div class="status-item">
+                    <span class="status-icon">📝</span>
+                    <span class="status-text">编辑即同步</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-icon">💡</span>
+                    <span class="status-text">点击贺卡有惊喜</span>
+                </div>
             </div>
 
-            <div class="greeting">🎂 生日快乐 🎂</div>
-            <div class="name" id="dynamicName">林语晴</div>
-            <div class="date-badge" id="dynamicDate">
-                <span>📅</span> <span id="dateText">5月20日</span> <span>🎈</span>
+            <!-- 互动编辑区 -->
+            <div class="edit-area">
+                <div class="edit-group">
+                    <label>✨ 收件人名字</label>
+                    <input type="text" id="nameEditor" value="林语晴" placeholder="输入名字">
+                </div>
+                <div class="edit-group">
+                    <label>📅 生日日期</label>
+                    <input type="text" id="dateEditor" value="5月20日" placeholder="例如 5月20日">
+                </div>
+                <div class="edit-group">
+                    <label>💌 祝福语</label>
+                    <textarea id="messageEditor" rows="2" placeholder="写下你的祝福...">愿你的笑容如百合花般清雅绽放，每一天都有阳光与花香相伴。生日快乐，永远被温柔眷顾！</textarea>
+                </div>
+                <div class="hint">✏️ 修改上面的文字，下方贺卡会立刻同步变化 ✨</div>
             </div>
-            <div class="custom-message" id="dynamicMessage">
+
+            <!-- 动态展示区 -->
+            <div class="greeting-title">🎂 生日快乐 🎂</div>
+            <div class="display-name" id="showName">林语晴</div>
+            <div class="display-date">
+                <span>📅</span>
+                <span id="showDate">5月20日</span>
+                <span>🎈</span>
+            </div>
+            <div class="display-message" id="showMessage">
                 愿你的笑容如百合花般清雅绽放，每一天都有阳光与花香相伴。生日快乐，永远被温柔眷顾！
             </div>
-            
-            <button class="celebrate-btn" id="fireworksBtn">
-                🤍 百合祝福·烟火盛典 🤍
+
+            <button class="celebrate-btn" id="celebrateBtn">
+                🤍 开启百合烟火祝福 🤍
             </button>
-            <div class="footer-sign">
-                <span>❤️ 点击卡片任意区域开启缤纷特效 ❤️</span>
-                <span>⚜️ 百合花护佑 · 幸福长存 ⚜️</span>
+            <div class="footer">
+                <span>❤️ 点击贺卡任意处也有惊喜特效 ❤️</span>
+                <span>⚜️ 百合花开 · 幸福常在 ⚜️</span>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    (function(){
-        // ========== 1. 修复版：实时更新名字/日期/祝福语 ==========
-        const nameInput = document.getElementById('nameInput');
-        const dateInput = document.getElementById('dateInput');
-        const messageInput = document.getElementById('messageInput');
-        const dynamicNameSpan = document.getElementById('dynamicName');
-        const dateTextSpan = document.getElementById('dateText');
-        const dynamicMsgSpan = document.getElementById('dynamicMessage');
+    // ============================================================
+    // 1. 互动编辑功能 —— 实时修改名字、日期、祝福语
+    // ============================================================
+    const nameEditor = document.getElementById('nameEditor');
+    const dateEditor = document.getElementById('dateEditor');
+    const messageEditor = document.getElementById('messageEditor');
+    const showName = document.getElementById('showName');
+    const showDate = document.getElementById('showDate');
+    const showMessage = document.getElementById('showMessage');
 
-        // 更新函数
-        function updateCardText() {
-            // 获取输入值，如果为空则使用默认值
-            let newName = nameInput.value.trim();
-            if (newName === "") newName = "亲爱的朋友";
-            dynamicNameSpan.innerText = newName;
-            
-            let newDate = dateInput.value.trim();
-            if (newDate === "") newDate = "今天";
-            dateTextSpan.innerText = newDate;
-            
-            let newMsg = messageInput.value.trim();
-            if (newMsg === "") newMsg = "愿你拥有世间所有美好，生日快乐！百合花开，幸福常在。";
-            dynamicMsgSpan.innerText = newMsg;
+    function refreshDisplay() {
+        let nameVal = nameEditor.value.trim();
+        if (nameVal === "") nameVal = "亲爱的朋友";
+        showName.innerText = nameVal;
+
+        let dateVal = dateEditor.value.trim();
+        if (dateVal === "") dateVal = "今天";
+        showDate.innerText = dateVal;
+
+        let msgVal = messageEditor.value.trim();
+        if (msgVal === "") msgVal = "愿你拥有世间所有美好，生日快乐！🎂";
+        showMessage.innerText = msgVal;
+    }
+
+    nameEditor.addEventListener('input', refreshDisplay);
+    dateEditor.addEventListener('input', refreshDisplay);
+    messageEditor.addEventListener('input', refreshDisplay);
+    refreshDisplay();
+
+    // ============================================================
+    // 2. 状态栏更新函数
+    // ============================================================
+    const musicStatusText = document.getElementById('musicStatusText');
+    const effectStatusText = document.getElementById('effectStatusText');
+    const musicIndicator = document.getElementById('musicIndicator');
+    const effectIndicator = document.getElementById('effectIndicator');
+
+    function updateMusicStatus(isPlaying) {
+        if (isPlaying) {
+            musicStatusText.innerText = '音乐播放中 🎶';
+            musicIndicator.className = 'status-indicator indicator-active';
+        } else {
+            musicStatusText.innerText = '音乐待播放';
+            musicIndicator.className = 'status-indicator indicator-idle';
         }
+    }
 
-        // 绑定输入事件 - 确保实时响应
-        nameInput.addEventListener('input', updateCardText);
-        dateInput.addEventListener('input', updateCardText);
-        messageInput.addEventListener('input', updateCardText);
-        
-        // 页面加载时执行一次，确保显示正确
-        updateCardText();
+    function updateEffectStatus(isActive) {
+        if (isActive) {
+            effectStatusText.innerText = '花瓣飞舞中 ✨';
+            effectIndicator.className = 'status-indicator indicator-active';
+        } else {
+            effectStatusText.innerText = '特效待触发';
+            effectIndicator.className = 'status-indicator indicator-idle';
+        }
+    }
 
-        // ========== 2. Canvas 百合花瓣 + 气球动画 ==========
-        const canvas = document.getElementById('lilyCanvas');
-        const ctx = canvas.getContext('2d');
-        let width, height;
-        let petals = [];
-        let balloons = [];
-        let stars = [];
-        let isFireworksActive = false;
-        let fireworkInterval = null;
+    // 初始状态
+    updateMusicStatus(false);
+    updateEffectStatus(false);
 
-        // 绘制百合花瓣
-        function drawPetal(x, y, angle, size, color) {
+    // ============================================================
+    // 3. 百合花瓣 + 气球 动画背景
+    // ============================================================
+    const canvas = document.getElementById('decoCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let petals = [];
+    let balloons = [];
+    let stars = [];
+    let fireworksActive = false;
+    let fireInterval = null;
+
+    function drawPetal(x, y, angle, size, color) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(angle);
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.quadraticCurveTo(size*0.6, -size*0.8, size*1.2, -size*0.2);
+        ctx.quadraticCurveTo(size*0.9, size*0.3, 0, size*0.5);
+        ctx.quadraticCurveTo(-size*0.9, size*0.3, -size*1.2, -size*0.2);
+        ctx.quadraticCurveTo(-size*0.6, -size*0.8, 0, 0);
+        ctx.fillStyle = color;
+        ctx.fill();
+        ctx.restore();
+    }
+
+    class Petal {
+        constructor(x, y, size, color, vx, vy, rot, spin) {
+            this.x = x; this.y = y; this.size = size; this.color = color;
+            this.vx = vx; this.vy = vy; this.rot = rot; this.spin = spin;
+            this.alpha = 1;
+        }
+        update() {
+            this.x += this.vx;
+            this.y += this.vy;
+            this.vy += 0.05;
+            this.rot += this.spin;
+            this.alpha -= 0.003;
+            return this.alpha > 0 && this.y < height + 100;
+        }
+        draw() {
             ctx.save();
-            ctx.translate(x, y);
-            ctx.rotate(angle);
-            ctx.beginPath();
-            ctx.moveTo(0, 0);
-            ctx.quadraticCurveTo(size*0.6, -size*0.8, size*1.2, -size*0.2);
-            ctx.quadraticCurveTo(size*0.9, size*0.3, 0, size*0.5);
-            ctx.quadraticCurveTo(-size*0.9, size*0.3, -size*1.2, -size*0.2);
-            ctx.quadraticCurveTo(-size*0.6, -size*0.8, 0, 0);
-            ctx.fillStyle = color;
-            ctx.shadowBlur = 4;
-            ctx.fill();
-            ctx.shadowBlur = 0;
+            ctx.globalAlpha = this.alpha;
+            drawPetal(this.x, this.y, this.rot, this.size, this.color);
+            ctx.globalAlpha = 1;
             ctx.restore();
         }
+    }
 
-        class LilyPetal {
-            constructor(x, y, size, color, vx, vy, rot, spin) {
-                this.x = x; this.y = y; this.size = size; this.color = color;
-                this.vx = vx; this.vy = vy; this.rot = rot; this.spin = spin;
-                this.alpha = 1;
-            }
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-                this.vy += 0.05;
-                this.rot += this.spin;
-                this.alpha -= 0.0025;
-                return this.alpha > 0 && this.y < height + 80;
-            }
-            draw() {
-                ctx.save();
-                ctx.globalAlpha = this.alpha;
-                drawPetal(this.x, this.y, this.rot, this.size, this.color);
-                ctx.globalAlpha = 1;
-                ctx.restore();
-            }
+    class Balloon {
+        constructor(x, y, r, color, vy, sway) {
+            this.x = x; this.y = y; this.r = r; this.color = color;
+            this.vy = vy; this.sway = sway; this.angle = Math.random() * Math.PI * 2;
         }
+        update() {
+            this.y += this.vy;
+            this.angle += 0.02;
+            this.x += Math.sin(this.angle) * this.sway;
+            if (this.y + this.r < 0) { this.y = height + this.r; this.x = Math.random() * width; }
+            if (this.x - this.r > width) this.x = -this.r;
+            if (this.x + this.r < 0) this.x = width + this.r;
+        }
+        draw() {
+            ctx.beginPath();
+            ctx.ellipse(this.x, this.y, this.r, this.r*1.15, 0, 0, Math.PI*2);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+            ctx.beginPath();
+            ctx.moveTo(this.x-2, this.y+this.r*0.7);
+            ctx.lineTo(this.x, this.y+this.r*1.1);
+            ctx.lineTo(this.x+2, this.y+this.r*0.7);
+            ctx.fillStyle = "#b67d45";
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(this.x-this.r*0.3, this.y-this.r*0.2, this.r*0.2, 0, Math.PI*2);
+            ctx.fillStyle = "rgba(255,250,210,0.9)";
+            ctx.fill();
+        }
+    }
 
-        class Balloon {
-            constructor(x, y, radius, color, speedY, sway) {
-                this.x = x; this.y = y; this.radius = radius; this.color = color;
-                this.speedY = speedY; this.sway = sway; this.angle = Math.random() * Math.PI * 2;
-            }
-            update() {
-                this.y += this.speedY;
-                this.angle += 0.018;
-                this.x += Math.sin(this.angle) * this.sway;
-                if (this.y + this.radius < 0) { 
-                    this.y = height + this.radius; 
-                    this.x = Math.random() * width; 
-                }
-                if (this.x - this.radius > width) this.x = -this.radius;
-                if (this.x + this.radius < 0) this.x = width + this.radius;
-            }
-            draw() {
-                ctx.beginPath();
-                ctx.ellipse(this.x, this.y, this.radius, this.radius*1.15, 0, 0, Math.PI*2);
-                ctx.fillStyle = this.color;
-                ctx.fill();
-                ctx.beginPath();
-                ctx.moveTo(this.x-2, this.y+this.radius*0.7);
-                ctx.lineTo(this.x, this.y+this.radius*1.1);
-                ctx.lineTo(this.x+2, this.y+this.radius*0.7);
-                ctx.fillStyle = "#b67d45";
-                ctx.fill();
-                ctx.beginPath();
-                ctx.arc(this.x-this.radius*0.25, this.y-this.radius*0.2, this.radius*0.18, 0, Math.PI*2);
-                ctx.fillStyle = "rgba(255,245,210,0.8)";
-                ctx.fill();
-            }
+    function initScene() {
+        balloons = [];
+        for (let i = 0; i < 14; i++) {
+            let rad = 18 + Math.random() * 24;
+            let col = `hsl(${Math.random() * 40 + 30}, 70%, 70%)`;
+            let vy = -0.2 - Math.random() * 0.6;
+            let sw = 0.2 + Math.random() * 0.7;
+            balloons.push(new Balloon(Math.random() * width, Math.random() * height, rad, col, vy, sw));
         }
+        stars = [];
+        for (let i = 0; i < 80; i++) {
+            stars.push({
+                x: Math.random() * width, y: Math.random() * height, r: Math.random() * 2 + 1,
+                alpha: Math.random() * 0.6, flick: 0.02 + Math.random() * 0.05
+            });
+        }
+    }
 
-        function initBackground() {
-            balloons = [];
-            for(let i=0;i<12;i++){
-                let rad = 18 + Math.random() * 22;
-                let col = `hsl(${Math.random()*40 + 30}, 70%, 70%)`;
-                let spd = -0.25 - Math.random() * 0.6;
-                let sw = 0.2+Math.random()*0.6;
-                balloons.push(new Balloon(Math.random()*width, Math.random()*height, rad, col, spd, sw));
-            }
-            stars = [];
-            for(let i=0;i<70;i++){
-                stars.push({
-                    x: Math.random()*width, y: Math.random()*height, r: Math.random()*2+0.8,
-                    alpha: Math.random()*0.6, flick: 0.02+Math.random()*0.04
-                });
-            }
+    function drawStars() {
+        for (let s of stars) {
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255, 240, 170, ${s.alpha + Math.sin(Date.now() * 0.002 * s.flick) * 0.2})`;
+            ctx.fill();
         }
+    }
 
-        function drawStarsBg() {
-            for(let s of stars) {
-                ctx.beginPath();
-                ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
-                ctx.fillStyle = `rgba(255, 245, 180, ${s.alpha + Math.sin(Date.now()*0.002*s.flick)*0.2})`;
-                ctx.fill();
-            }
+    function addPetals(count, cx, cy) {
+        let centerX = cx !== undefined ? cx : width / 2;
+        let centerY = cy !== undefined ? cy : height / 3;
+        for (let i = 0; i < count; i++) {
+            let size = 6 + Math.random() * 14;
+            let color = `hsl(${45 + Math.random() * 25}, 70%, 70%)`;
+            if (Math.random() > 0.6) color = `hsl(${80 + Math.random() * 20}, 75%, 75%)`;
+            let vx = (Math.random() - 0.5) * 1.6;
+            let vy = (Math.random() - 0.5) * 1.2 + 0.8;
+            let rot = Math.random() * Math.PI * 2;
+            let spin = (Math.random() - 0.5) * 0.07;
+            let xOff = (Math.random() - 0.5) * 90;
+            let yOff = (Math.random() - 0.5) * 60;
+            petals.push(new Petal(centerX + xOff, centerY + yOff, size, color, vx, vy, rot, spin));
         }
+    }
 
-        function addPetalShower(count=18, centerX=null, centerY=null) {
-            let cx = centerX !== null ? centerX : width/2;
-            let cy = centerY !== null ? centerY : height/3;
-            for(let i=0;i<count;i++) {
-                let size = 6 + Math.random() * 12;
-                let color = `hsl(${45 + Math.random() * 20}, 70%, 65%)`;
-                if(Math.random()>0.6) color = `hsl(${80 + Math.random()*20}, 75%, 75%)`;
-                let vx = (Math.random() - 0.5) * 1.8;
-                let vy = (Math.random() - 0.5) * 1.2 + 0.8;
-                let rot = Math.random() * Math.PI * 2;
-                let spin = (Math.random() - 0.5) * 0.08;
-                let xOff = (Math.random() - 0.5) * 80;
-                let yOff = (Math.random() - 0.5) * 50;
-                petals.push(new LilyPetal(cx + xOff, cy + yOff, size, color, vx, vy, rot, spin));
-            }
-        }
+    function startFireworks(duration = 5000) {
+        if (fireworksActive) return;
+        fireworksActive = true;
+        updateEffectStatus(true);
+        
+        let interval = setInterval(() => {
+            if (!fireworksActive) { clearInterval(interval); return; }
+            addPetals(12, width / 2 + (Math.random() - 0.5) * 200, height * 0.2 + Math.random() * 100);
+            addPetals(8, Math.random() * width, Math.random() * height * 0.5);
+        }, 320);
+        fireInterval = interval;
+        
+        setTimeout(() => {
+            fireworksActive = false;
+            updateEffectStatus(false);
+            clearInterval(fireInterval);
+            setTimeout(() => { petals = petals.filter(p => p.alpha > 0.1); }, 1000);
+        }, duration);
+    }
 
-        function startLilyCelebration(duration=5000) {
-            if(isFireworksActive) return;
-            isFireworksActive = true;
-            let interval = setInterval(() => {
-                if(!isFireworksActive) { clearInterval(interval); return; }
-                addPetalShower(12, width/2 + (Math.random()-0.5)*150, height*0.2 + Math.random()*100);
-                addPetalShower(8, Math.random()*width, Math.random()*height*0.4);
-            }, 300);
-            fireworkInterval = interval;
-            setTimeout(() => {
-                isFireworksActive = false;
-                clearInterval(fireworkInterval);
-                setTimeout(() => {
-                    petals = petals.filter(p => p.alpha > 0.1);
-                }, 800);
-            }, duration);
+    // 音频
+    let audioCtx = null;
+    let soundOn = false;
+    
+    function initAudio() { 
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)(); 
+    }
+    
+    function playMelody() {
+        if (!soundOn) return;
+        if (!audioCtx) initAudio();
+        if (audioCtx.state === 'suspended') {
+            audioCtx.resume().then(() => playSimple());
+        } else {
+            playSimple();
         }
-        
-        // 音频
-        let audioCtx = null;
-        let soundEnabled = false;
-        function initAudio() { if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
-        function playBirthdayMelody() {
-            if(!soundEnabled) return;
-            if(!audioCtx) initAudio();
-            if(audioCtx.state === 'suspended') audioCtx.resume().then(()=>playTune());
-            else playTune();
+    }
+    
+    function playSimple() {
+        if (!audioCtx) return;
+        const now = audioCtx.currentTime;
+        const notes = [587.33, 587.33, 659.25, 587.33, 783.99, 698.46];
+        let t = now;
+        for (let i = 0; i < notes.length; i++) {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain); 
+            gain.connect(audioCtx.destination);
+            osc.frequency.value = notes[i];
+            gain.gain.value = 0.2;
+            osc.start(t);
+            gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.4);
+            osc.stop(t + 0.4);
+            t += 0.35;
         }
-        function playTune() {
-            if(!audioCtx) return;
-            const now = audioCtx.currentTime;
-            const melody = [587.33, 587.33, 659.25, 587.33, 783.99, 698.46];
-            let time = now;
-            for(let i=0;i<melody.length;i++) {
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.connect(gain); gain.connect(audioCtx.destination);
-                osc.frequency.value = melody[i];
-                gain.gain.value = 0.2;
-                osc.start(time);
-                gain.gain.exponentialRampToValueAtTime(0.0001, time+0.45);
-                osc.stop(time+0.45);
-                time += 0.38;
-            }
-            setTimeout(()=>{
-                const osc2 = audioCtx.createOscillator();
-                const gain2 = audioCtx.createGain();
-                osc2.connect(gain2); gain2.connect(audioCtx.destination);
-                osc2.frequency.value = 880;
-                gain2.gain.value = 0.12;
-                osc2.start(); gain2.gain.exponentialRampToValueAtTime(0.0001,0.6);
-                osc2.stop(0.6);
-            },200);
+    }
+
+    function fullCelebrate() {
+        if (!soundOn) {
+            soundOn = true;
+            updateMusicStatus(true);
+            initAudio();
+            audioCtx.resume().then(() => playMelody()).catch(e => console.log);
+        } else {
+            playMelody();
         }
-        
-        function launchFullCelebration() {
-            if(!soundEnabled) {
-                soundEnabled=true;
-                document.getElementById('musicStatus').innerText='🔊 百合旋律';
-                initAudio();
-                audioCtx.resume().then(()=>playBirthdayMelody()).catch(e=>console.log);
-            } else playBirthdayMelody();
-            startLilyCelebration(5200);
-            for(let b of balloons) b.speedY = -0.6 - Math.random()*0.7;
-            setTimeout(()=>{
-                for(let b of balloons) if(b) b.speedY = -0.25 - Math.random()*0.5;
-            }, 2800);
-            addPetalShower(35, width/2, height/3);
-            setTimeout(()=>addPetalShower(28, width*0.3, height*0.5), 300);
-            setTimeout(()=>addPetalShower(28, width*0.7, height*0.4), 600);
+        startFireworks(5000);
+        addPetals(40, width / 2, height / 3);
+        setTimeout(() => addPetals(30, width * 0.3, height * 0.4), 200);
+        setTimeout(() => addPetals(30, width * 0.7, height * 0.5), 400);
+        for (let b of balloons) b.vy = -0.7 - Math.random() * 0.6;
+        setTimeout(() => {
+            for (let b of balloons) b.vy = -0.2 - Math.random() * 0.5;
+        }, 2500);
+    }
+
+    // 绑定UI事件
+    document.getElementById('celebrateBtn').addEventListener('click', (e) => { 
+        e.stopPropagation(); 
+        fullCelebrate(); 
+    });
+    
+    document.querySelector('.card-wrapper').addEventListener('click', (e) => {
+        if (e.target.closest('.edit-area')) return;
+        fullCelebrate();
+    });
+
+    // Canvas 动画循环
+    function resizeCanvas() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+        initScene();
+    }
+
+    function animate() {
+        if (!ctx) return;
+        ctx.clearRect(0, 0, width, height);
+        let grad = ctx.createLinearGradient(0, 0, 0, height);
+        grad.addColorStop(0, '#fff0df');
+        grad.addColorStop(1, '#e7dbbc');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, width, height);
+        drawStars();
+        for (let b of balloons) { b.update(); b.draw(); }
+        for (let i = 0; i < petals.length; i++) {
+            let keep = petals[i].update();
+            petals[i].draw();
+            if (!keep) { petals.splice(i, 1); i--; }
         }
-        
-        const btn = document.getElementById('fireworksBtn');
-        const cardWrap = document.querySelector('.card-wrapper');
-        btn.addEventListener('click', (e) => { e.stopPropagation(); launchFullCelebration(); });
-        cardWrap.addEventListener('click', (e) => { if(e.target !== btn && !btn.contains(e.target)) launchFullCelebration(); });
-        
-        const musicToggle = document.getElementById('musicToggleBtn');
-        musicToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if(!soundEnabled){
-                soundEnabled=true;
-                document.getElementById('musicStatus').innerText='🔊 百合旋律';
-                initAudio();
-                audioCtx.resume().then(()=>playBirthdayMelody()).catch(e=>console.log);
-            } else playBirthdayMelody();
-            addPetalShower(18, width/2, height-60);
-        });
-        
-        function resizeCanvas() {
-            width = window.innerWidth; height = window.innerHeight;
-            canvas.width = width; canvas.height = height;
-            initBackground();
-        }
-        
-        function animate() {
-            if(!ctx) return;
-            ctx.clearRect(0,0,width,height);
-            let grad = ctx.createLinearGradient(0,0,0,height);
-            grad.addColorStop(0,'#fff0df'); grad.addColorStop(0.6,'#fbead5'); grad.addColorStop(1,'#e7dbbc');
-            ctx.fillStyle = grad; ctx.fillRect(0,0,width,height);
-            drawStarsBg();
-            for(let b of balloons) { b.update(); b.draw(); }
-            for(let i=0;i<petals.length;i++){
-                let keep = petals[i].update();
-                petals[i].draw();
-                if(!keep){ petals.splice(i,1); i--; }
-            }
-            requestAnimationFrame(animate);
-        }
-        
-        window.addEventListener('resize', ()=>{ resizeCanvas(); });
-        resizeCanvas();
-        animate();
-        setTimeout(()=>{ addPetalShower(16, width/2, 40); }, 800);
-        
-        canvas.style.pointerEvents = 'none';
-    })();
+        requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', () => { resizeCanvas(); });
+    resizeCanvas();
+    animate();
+    setTimeout(() => { addPetals(18, width / 2, 50); }, 500);
+    canvas.style.pointerEvents = 'none';
 </script>
 </body>
 </html>
